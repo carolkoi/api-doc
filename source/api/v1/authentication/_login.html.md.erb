@@ -1,0 +1,333 @@
+# Authentication Module
+
+## Login
+
+```python
+import requests
+import json
+
+url = "https://dev.slafrica.net:6812/api/authentication/authenticate"
+
+payload = json.dumps({
+  "email": "rxGPq1bq1D@BpkynZIokiKkBmQoki.lth",
+  "password": "exercitation",
+  "otp": "incididunt"
+})
+headers = {
+  'Content-Type': 'application/json'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+
+
+```
+
+```javascript
+var axios = require('axios');
+var data = JSON.stringify({
+  "email": "rxGPq1bq1D@BpkynZIokiKkBmQoki.lth",
+  "password": "exercitation",
+  "otp": "incididunt"
+});
+
+var config = {
+  method: 'post',
+  url: 'https://dev.slafrica.net:6812/api/authentication/authenticate',
+  headers: { 
+    'Content-Type': 'application/json'
+  },
+  data : data
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+
+
+
+```
+```php
+<?php
+
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'https://dev.slafrica.net:6812/api/authentication/authenticate',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'POST',
+  CURLOPT_POSTFIELDS =>'{
+    "email": "rxGPq1bq1D@BpkynZIokiKkBmQoki.lth",
+    "password": "exercitation",
+    "otp": "incididunt"
+}',
+  CURLOPT_HTTPHEADER => array(
+    'Content-Type: application/json'
+  ),
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+echo $response;
+
+
+
+```
+
+```csharp
+
+var client = new RestClient("https://dev.slafrica.net:6812/api/authentication/authenticate");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("Content-Type", "application/json");
+var body = @"{" + "\n" +
+@"    ""email"": ""rxGPq1bq1D@BpkynZIokiKkBmQoki.lth""," + "\n" +
+@"    ""password"": ""exercitation""," + "\n" +
+@"    ""otp"": ""incididunt""" + "\n" +
+@"}";
+request.AddParameter("application/json", body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
+
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"email\": \"rxGPq1bq1D@BpkynZIokiKkBmQoki.lth\",\n    \"password\": \"exercitation\",\n    \"otp\": \"incididunt\"\n}");
+Request request = new Request.Builder()
+  .url("//api/authentication/authenticate")
+  .method("POST", body)
+  .addHeader("Content-Type", "application/json")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+> This is the response we should get
+
+```json
+{
+    "id": 0,
+    "description": "OTP Code send to you phone and Email",
+    "isAdmin": false,
+    "isRoot": false
+}
+
+```
+
+### Request Information
+
+|Category| Value|
+|Http request| POST|
+|URL| https://dev.slafrica.net:6812/api/authentication/authenticate|
+
+### Headers
+|Category| Value|
+|---------|-------|
+|Content-Type|application/json|
+
+
+### Input Schema for request
+|Field| Meaning|
+|-------|-------|
+|email|Email of the person loggin in|
+|password|password of the person loggin in|
+|otp|pass as empty string for the first request|
+
+### Output Schema for request
+|Field| Meaning|
+|---------|------|
+|id|Id of the logged in person|
+|description|Gives the message of otp confirmation|
+|isAdmin| The admin status of the logged in person in respective company|
+|isRoot|Root status of the logged person in the whole system|
+
+## Confirm OTP (2FA)
+
+```python
+
+import requests
+import json
+
+url = "https://dev.slafrica.net:6812/api/authentication/authenticate"
+
+payload = json.dumps({
+  "email": "carolgitonga45@gmail.com",
+  "password": "123456789",
+  "otp": "30144"
+})
+headers = {
+  'Content-Type': 'application/json',
+  'Cookie': 'refreshToken=8C7A42A6F8555AB1045E4C420ADE90CB78046FAA5C93602E65DCD1611B21C8F0221CC43C87AF9C1F'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+
+
+
+```
+
+```javascript
+
+var axios = require('axios');
+var data = JSON.stringify({
+  "email": "carolgitonga45@gmail.com",
+  "password": "123456789",
+  "otp": "30144"
+});
+
+var config = {
+  method: 'post',
+  url: 'https://dev.slafrica.net:6812/api/authentication/authenticate',
+  headers: { 
+    'Content-Type': 'application/json', 
+    'Cookie': 'refreshToken=8C7A42A6F8555AB1045E4C420ADE90CB78046FAA5C93602E65DCD1611B21C8F0221CC43C87AF9C1F'
+  },
+  data : data
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+
+
+```
+```php
+
+<?php
+
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'https://dev.slafrica.net:6812/api/authentication/authenticate',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'POST',
+  CURLOPT_POSTFIELDS =>'{
+    "email": "carolgitonga45@gmail.com",
+    "password": "123456789",
+    "otp": "30144"
+}',
+  CURLOPT_HTTPHEADER => array(
+    'Content-Type: application/json',
+    'Cookie: refreshToken=8C7A42A6F8555AB1045E4C420ADE90CB78046FAA5C93602E65DCD1611B21C8F0221CC43C87AF9C1F'
+  ),
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+echo $response;
+
+
+
+
+```
+
+```csharp
+
+var client = new RestClient("https://dev.slafrica.net:6812/api/authentication/authenticate");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("Content-Type", "application/json");
+request.AddHeader("Cookie", "refreshToken=8C7A42A6F8555AB1045E4C420ADE90CB78046FAA5C93602E65DCD1611B21C8F0221CC43C87AF9C1F");
+var body = @"{" + "\n" +
+@"    ""email"": ""carolgitonga45@gmail.com""," + "\n" +
+@"    ""password"": ""123456789""," + "\n" +
+@"    ""otp"": ""30144""" + "\n" +
+@"}";
+request.AddParameter("application/json", body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
+
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"email\": \"carolgitonga45@gmail.com\",\n    \"password\": \"123456789\",\n    \"otp\": \"30144\"\n}");
+Request request = new Request.Builder()
+  .url("https://dev.slafrica.net:6812/api/authentication/authenticate")
+  .method("POST", body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Cookie", "refreshToken=8C7A42A6F8555AB1045E4C420ADE90CB78046FAA5C93602E65DCD1611B21C8F0221CC43C87AF9C1F")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+> This is the response we should get
+
+```json
+{
+    "id": 0,
+    "companyCode": "SLA10020",
+    "companyName": "SWITCHLINK AFRICA",
+    "jwtToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYmYiOjE2NDE2MzUzMDIsImV4cCI6MTY0MTY0MjUwMiwiaWF0IjoxNjQxNjM1MzAyfQ.AB3pGJCaX8OA7b0cKXxmuoX8ev2q6w71rJHE0Kp7gfg",
+    "roles": [
+        "Can Manage Float",
+        "CanCreateBatchTransaction",
+        "CanCreateTransaction",
+        "CanEditCompany",
+        "CanManageUsers",
+        "CanPostTransactions",
+        "CanReprocessTransaction",
+        "CanSearchTransaction",
+        "CanValidateCompany",
+        "CanViewLimitedSystemModules"
+    ],
+    "refreshToken": "8C7A42A6F8555AB1045E4C420ADE90CB78046FAA5C93602E65DCD1611B21C8F0221CC43C87AF9C1F",
+    "isAdmin": true,
+    "isRoot": true
+}
+
+```
+
+### Request Information
+
+|Category| Value|
+|Http request| POST|
+|URL| https://dev.slafrica.net:6812/api/authentication/authenticate|
+
+### Headers
+|Category| Value|
+|---------|-------|
+|Content-Type|application/json|
+
+
+### Input Schema for request
+|Field| Meaning|
+|-------|-------|
+|otp|OTP code sent to your email and phone after login|
+
+### Output Schema for request
+|Field| Meaning|
+|---------|------|
+|id|Id of the logged in person|
+|description|Gives the message of otp confirmation|
+|isAdmin| The admin status of the logged in person in respective company|
+|isRoot|Root status of the logged person in the whole system|

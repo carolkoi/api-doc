@@ -1,0 +1,116 @@
+# Post Module
+
+## Get all posts
+
+```python
+import requests
+
+url = "https://jsonplaceholder.typicode.com/posts"
+
+payload={}
+headers = {}
+
+response = requests.request("GET", url, headers=headers, data=payload)
+
+print(response.text)
+
+```
+
+```javascript
+var axios = require('axios');
+
+var config = {
+  method: 'get',
+  url: 'https://jsonplaceholder.typicode.com/posts',
+  headers: { }
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+
+
+```
+```php
+<?php
+
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'https://jsonplaceholder.typicode.com/posts',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'GET',
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+echo $response;
+
+
+```
+
+```csharp
+
+var client = new RestClient("https://jsonplaceholder.typicode.com/posts");
+client.Timeout = -1;
+var request = new RestRequest(Method.GET);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
+
+```
+
+```java
+
+```
+> This is the response we should get
+
+```json
+[
+    {
+        "userId": 1,
+        "id": 1,
+        "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+        "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+    },
+    {
+        "userId": 1,
+        "id": 2,
+        "title": "qui est esse",
+        "body": "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla"
+    }
+]
+
+```
+
+### Request Information
+
+|Category| Value|
+|HTtp request| GET|
+|URL| https://jsonplaceholder.typicode.com/posts|
+
+### Headers
+No headers are required
+
+
+### Input Schema for request
+No input schema
+
+### Output Schema for request
+
+
+
+## Get  a single post
+
+## Get comments of a post
+
+## Get posts of an user
